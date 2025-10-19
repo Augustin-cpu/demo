@@ -1,11 +1,12 @@
 <?php
-function database()
-{
-    try {
-        $pdo_option[PDO::ATTR_ERRMODE] = PDO::ERRMODE_EXCEPTION;
-        $bdd = new PDO('mysql:host=localhost;dbname=demo', 'root', '', $pdo_option);
-    } catch (Exception $e) {
-        die('Erreur :' . $e->getMessage());
-    }
-    return $bdd;
-}
+
+$root =  $_SERVER['DOCUMENT_ROOT'];
+$host = $_SERVER['HTTP_HOST'];
+
+define('ROOT', $root.'demo/');
+define('HOST', 'http://'.$host.'demo/');
+define('CONTROLLERS', ROOT.'controllers/');
+define('MODEL', ROOT.'model/');
+define('TEMPLATE', ROOT.'controllers/');
+define('LIBRAIRY', ROOT.'lib/');
+define('UPLOADS', ROOT.'uploads/');

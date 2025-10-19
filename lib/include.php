@@ -1,7 +1,9 @@
 <?php
 session_start();
+
+
 require_once('lib/config.php');
-require_once('model/fonction.php');
+include('model/fonction.php');
 require_once('controllers/index.php');
 require_once('controllers/login.php');
 require_once('controllers/logout.php');
