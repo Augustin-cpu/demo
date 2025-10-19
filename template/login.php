@@ -4,7 +4,7 @@ ob_start();
 
 ?>
 <div class="login-container">
-    <?= Flash()?>
+
 <form method="POST"  class="needs-validation " novalidate>
             
             <div class="mb-3">

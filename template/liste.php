@@ -3,7 +3,6 @@ $title = "Affichage ajoute des jeux";
 ob_start();
 ?>
 <div class="row">
-    <?= Flash() ?>
     <form method="post" class="col-lg-8" enctype="multipart/form-data">
         <a href="?page=logout" role="button" class="text-decoration-none btn btn-primary">Deconnexion</a>
         <h1 class="display-4">formulaire</h1>

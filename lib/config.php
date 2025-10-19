@@ -1,12 +1,20 @@
 <?php
+session_start();
+require_once('model/fonction.php');
+class MyAutoload{
 
-$root =  $_SERVER['DOCUMENT_ROOT'];
-$host = $_SERVER['HTTP_HOST'];
-
-define('ROOT', $root.'demo/');
-define('HOST', 'http://'.$host.'demo/');
-define('CONTROLLERS', ROOT.'controllers/');
-define('MODEL', ROOT.'model/');
-define('TEMPLATE', ROOT.'controllers/');
-define('LIBRAIRY', ROOT.'lib/');
-define('UPLOADS', ROOT.'uploads/');
+    public static function autoload($class){
+        if(file_exists('controllers/'.$class.'.php')){
+            include_once('controllers/'.$class.'.php');
+        }else if(file_exists('model/'.$class.'.php')){
+            include_once('model/'.$class.'.php');
+        }else if(file_exists('classes/'.$class.'.php')){
+            include_once('classes/'.$class.'.php');
+        }else if(file_exists('lib/'.$class.'.php')){
+            include_once('lib/'.$class.'.php');
+        }
+    }
+    public static function start(){
+        spl_autoload_register([__CLASS__,'autoload']);
+    }
+}

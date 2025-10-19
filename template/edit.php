@@ -43,7 +43,7 @@ ob_start();
             <input type="file" name="new_image" id="new_image" class="form-control">
         </div>
         <button type="submit" name="valide" class="btn btn-primary mt-2">Soumettre le formulaire</button>
-        <a href="index.php" role="button" class="text-decoration-none btn btn-dark mt-2">Revenir</a>
+        <a href="home.html" role="button" class="text-decoration-none btn btn-dark mt-2">Revenir</a>
     </form>
 </div>
 <?php $content = ob_get_clean();
