@@ -5,12 +5,12 @@ class Home
     public function showHome()
     {
         // // Vérifie si l'identifiant (user_id) EST DANS la session.
-        // if (!isset($_SESSION['Auth']['id'])) {
-        //     // Redirection immédiate vers la page de connexion
-        //     // setFlash('Vous été maintenant deconnecté', 'danger');
-        //     header('Location: ?page=login');
-        //     exit;
-        // }
+        if (!isset($_SESSION['Auth']['id'])) {
+            // Redirection immédiate vers la page de connexion
+            // setFlash('Vous été maintenant deconnecté', 'danger');
+            header('Location: ?page=login');
+            exit;
+        }
 
         // Si le script arrive ici, l'utilisateur est connecté.
         // $current_user_id = $_SESSION['Auth']['id'];
