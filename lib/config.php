@@ -1,20 +1,15 @@
 <?php
-session_start();
-require_once('model/fonction.php');
-class MyAutoload{
+define('ROOT_PATH', dirname(__DIR__));
+define('CONTROLLERS',ROOT_PATH.'/controllers/');
+define('MODEL',ROOT_PATH.'/model/');
+define('TEMPLATE',ROOT_PATH.'/template/');
+define('CLASSES',ROOT_PATH.'/classes/');
+define('LIB',ROOT_PATH.'/lib/');
+define('ASSETS',ROOT_PATH.'/assets/');
 
-    public static function autoload($class){
-        if(file_exists('controllers/'.$class.'.php')){
-            include_once('controllers/'.$class.'.php');
-        }else if(file_exists('model/'.$class.'.php')){
-            include_once('model/'.$class.'.php');
-        }else if(file_exists('classes/'.$class.'.php')){
-            include_once('classes/'.$class.'.php');
-        }else if(file_exists('lib/'.$class.'.php')){
-            include_once('lib/'.$class.'.php');
-        }
-    }
-    public static function start(){
-        spl_autoload_register([__CLASS__,'autoload']);
-    }
-}
+// Definition de la connectivite a la base de donnees
+define('DB_SERVER', 'localhost');
+define('DB_PASSWORD','root');
+define('DB_USERNAME','root');
+define('DB_NAME','demo');
+define('PDO_DSN','mysql:host='.DB_SERVER.';dbname='.DB_NAME);

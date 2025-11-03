@@ -4,17 +4,17 @@ class Home
 {
     public function showHome()
     {
-        // Vérifie si l'identifiant (user_id) EST DANS la session.
-        if (!isset($_SESSION['Auth']['id'])) {
-            // Redirection immédiate vers la page de connexion
-            setFlash('Vous été maintenant deconnecté', 'danger');
-            header('Location: ?page=login');
-            exit;
-        }
+        // // Vérifie si l'identifiant (user_id) EST DANS la session.
+        // if (!isset($_SESSION['Auth']['id'])) {
+        //     // Redirection immédiate vers la page de connexion
+        //     // setFlash('Vous été maintenant deconnecté', 'danger');
+        //     header('Location: ?page=login');
+        //     exit;
+        // }
 
         // Si le script arrive ici, l'utilisateur est connecté.
-        $current_user_id = $_SESSION['Auth']['id'];
-
+        // $current_user_id = $_SESSION['Auth']['id'];
+        $bdd = new Database();
         if (isset($_POST['valide'])) {
             if ((isset($_POST['nom']) && isset($_POST['category'])) && (isset($_POST['console']) && isset($_POST['prix'])) && (isset($_POST['joueur_max']) && isset($_POST['commentaires']))) {
 
@@ -77,30 +77,33 @@ class Home
                     'category' => $_POST['category'],
                     'image'     => $new_filename
                 );
-
-                addPost($post_data);
+                
+                $bdd->addPost($post_data);
             }
         }
-        $posts = getPost();
-        $categories = getCategory();
-        require_once('template/liste.php');
+        $post = $bdd->getPost();
+        $category = $bdd->getCategory();
+        $myView = new View('home');
+        $myView->render([
+            'posts'      => $post,
+            'categories' => $category]);
     }
 
     public function showEdit()
     {
+        $bdd = new Database();
         if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
             die("Erreur critique : ID non spécifié ou invalide dans l'URL.");
         }
 
         $id_a_modifier = (int)$_GET['id'];
-        $show = showPost($id_a_modifier);
-        $showCategory = showCategory($show);
-        $categories = getCategory();
-
+        $show = $bdd->showPost($id_a_modifier);
+        
         if (isset($_POST['valide'])) {
-            if ((isset($_POST['nom']) && isset($_POST['category'])) && (isset($_POST['console']) && isset($_POST['prix'])) && (isset($_POST['joueur_max']) && isset($_POST['commentaires']))) {
+            if (isset($_POST)) {
                 $post_data = array(
                     'nom'           => $_POST['nom'],
+                    'image'         => $_POST['new_image'],
                     'category'      => $_POST['category'],
                     'console'       => $_POST['console'],
                     'prix_nbr'      => $_POST['prix'],
@@ -108,11 +111,32 @@ class Home
                     'commentaires'  => $_POST['commentaires'],
                     'id'            => $_POST['id']
                 );
-                editPost($post_data);
+                $bdd->editPost($post_data);
             }
-            header('Location: index.php');
+            header('Location: ?page=home');
         }
+        $showCategory = $bdd->showCategory($show);
+        $categories = $bdd->getCategory();
 
-        require_once('template/edit.php');
+        $myView = new View('edit');
+        $myView->render([
+            'show'       => $show,
+            'showCategory'   => $showCategory,
+            'categories' => $categories
+        ]);
     }
+    public function Delete()
+    {
+
+        
+        $manager = new Database(); 
+        if (!isset($_GET['id']) || !ctype_digit($_GET['id'])) {
+                die("Erreur critique : ID non spécifié ou invalide dans l'URL.");
+            } else {
+                $id_delete = (int)$_GET['id'];
+                $manager->deletePost($id_delete);
+                header('Location: ?page=home');
+            }
+    }
+    
 }
