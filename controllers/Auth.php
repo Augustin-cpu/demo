@@ -7,14 +7,14 @@ class Auth
         $bdd = new Database();
         if (isset($_POST) && !empty($_POST)) {
             extract($_POST);
-            // $pass = sha1($pass);
+            $pass = sha1($pass);
             $datas = [
                 'pass' => $pass,
                 'mail' => $mail
             ];
 
             $toggle = $bdd->auth($datas);
-            if(isset($toggle)){
+            if (isset($toggle)) {
                 header('Location: ?page=home');
             }
         }
@@ -34,7 +34,30 @@ class Auth
         header('Location: ?page=login');
         exit;
     }
-    public function ShowRegister(){
+    public function ShowRegister()
+    {
+
+        $bdd = new Database();
+        if (isset($_POST) && !empty($_POST)) {
+            $pass = $_POST['pass'];
+            $email = $_POST['email'];
+            $confirmPass = $_POST['confirm_pass'];
+
+            $datas = [
+                'mail'   => $email,
+                'pass'   => sha1($pass),
+            ];
+            if ($confirmPass == $pass) {
+                $bdd->AddUser($datas);
+            }
+            $result = $bdd->auth($datas);
+            if ($result) {
+                header('Location: ?page=home');
+                exit;
+            }
+        }else{
+            echo 'Pas information valide';
+        }
         $myView = new View('register');
         $myView->render();
     }

@@ -31,6 +31,45 @@
 </head>
 
 <body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+    <div class="container">
+        
+        <a class="navbar-brand fw-bold" href="#">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-code-slash me-2" viewBox="0 0 16 16">
+                <path d="M10.478 1.647a.5.5 0 1 0-.756-.67l-4.5 5a.5.5 0 0 0 0 .67l4.5 5a.5.5 0 0 0 .756-.67L6.685 8l3.793-3.353z"/>
+            </svg>
+            Portfolio
+        </a>
+
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#accueil">Accueil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#projets">Projets</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#competences">Compétences</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#a-propos">À Propos</a>
+                </li>
+                <li class="nav-item ms-lg-3">
+                    <a class="btn btn-outline-light btn-sm" href="#contact" role="button">Me Contacter</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div style="height: 60px;"></div> 
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <div class="container d-flex p-3">
         <?= $contentpage ?>
     </div>

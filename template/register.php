@@ -8,7 +8,7 @@
                         <h4 class="card-title text-center mb-4 fw-bold text-primary">Créer un Compte</h4>
                         <hr>
                         
-                        <form method="POST" action="traitement_inscription.php" class="needs-validation" novalidate>
+                        <form method="POST"  class="needs-validation" novalidate>
                             
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email (Login)</label>
@@ -75,22 +75,3 @@
             </div>
         </div>
     </div>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    
-    <script>
-    (function () {
-      'use strict'
-      var forms = document.querySelectorAll('.needs-validation')
-      Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-          form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-              event.preventDefault()
-              event.stopPropagation()
-            }
-            form.classList.add('was-validated')
-          }, false)
-        })
-    })()
-    </script>

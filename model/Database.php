@@ -46,9 +46,9 @@ class Database
     public function editPost(array $post)
     {
         try {
-
-            $reponse = $this->bdd->prepare('UPDATE jeux_video SET nom = :nom, id_proprietaire = :category, console = :console, prix_nbr = :prix, joueur_max = :joueur_max, commentaires = :commentaires, image=:image WHERE id = :id');
-            $reponse->execute(array(
+            if(isset($post['image'])){
+                $reponse = $this->bdd->prepare('UPDATE jeux_video SET nom = :nom, id_proprietaire = :category, console = :console, prix_nbr = :prix, joueur_max = :joueur_max, commentaires = :commentaires, image=:image WHERE id = :id');
+                $reponse->execute(array(
                 'nom'           => $post['nom'],
                 'category'      => $post['category'],
                 'console'       => $post['console'],
@@ -58,6 +58,18 @@ class Database
                 'image'         => $post['image'],
                 'id'            => $post['id']
             ));
+            }else{
+                $reponse = $this->bdd->prepare('UPDATE jeux_video SET nom = :nom, id_proprietaire = :category, console = :console, prix_nbr = :prix, joueur_max = :joueur_max, commentaires = :commentaires WHERE id = :id');
+                $reponse->execute(array(
+                'nom'           => $post['nom'],
+                'category'      => $post['category'],
+                'console'       => $post['console'],
+                'prix'          => $post['prix_nbr'],
+                'joueur_max'    => $post['joueur_max'],
+                'commentaires'  => $post['commentaires'],
+                'id'            => $post['id']
+            ));
+            }
         } catch (Exception $e) {
             die('Erreur :' . $e->getMessage());
         }
@@ -116,7 +128,6 @@ class Database
             die('Erreur :' . $e->getMessage());
         }
     }
-
     public function auth(array $datas){
 
             $req = $this->bdd->prepare('SELECT * FROM users WHERE pass = :pass AND mail = :mail');
@@ -130,5 +141,13 @@ class Database
                 return true;
             }
             return false;
+    }
+    public function AddUser(array $datas = []){
+        $req = $this->bdd->prepare('INSERT INTO users(pass,mail) VALUES(:pass,:mail)');
+        // $pass = sha1($datas['pass']);
+        $req->execute(array(
+            'pass' => $datas['pass'],
+            'mail' => $datas['mail']
+        ));
     }
 }

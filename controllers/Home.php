@@ -101,6 +101,18 @@ class Home
         
         if (isset($_POST['valide'])) {
             if (isset($_POST)) {
+                if(!isset($_POST['new_image'])){
+                    $post_data = array(
+                    'nom'           => $_POST['nom'],
+                    'category'      => $_POST['category'],
+                    'console'       => $_POST['console'],
+                    'prix_nbr'      => $_POST['prix'],
+                    'joueur_max'    => $_POST['joueur_max'],
+                    'commentaires'  => $_POST['commentaires'],
+                    'id'            => $_POST['id']
+                );
+                $bdd->editPost($post_data);
+                }
                 $post_data = array(
                     'nom'           => $_POST['nom'],
                     'image'         => $_POST['new_image'],
