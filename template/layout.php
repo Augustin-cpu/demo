@@ -31,7 +31,7 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
+    <!-- <nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm fixed-top">
     <div class="container">
         
         <a class="navbar-brand fw-bold" href="#">
@@ -65,9 +65,8 @@
             </ul>
         </div>
     </div>
-</nav>
+</nav> -->
 
-<div style="height: 60px;"></div> 
 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <div class="container d-flex p-3">

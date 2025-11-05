@@ -13,6 +13,8 @@ class MyAutoload{
             include_once(LIB.$classes.'.php');
         }elseif(file_exists(TEMPLATE.$classes.'.php')){
             include_once(TEMPLATE.$classes.'.php');
+        }elseif(HELPERS.$classes.'.php'){
+            include_once(HELPERS.$classes.'.php');
         }
     }
     public static function start(){

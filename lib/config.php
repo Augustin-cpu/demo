@@ -4,6 +4,7 @@ define('CONTROLLERS',ROOT_PATH.'/controllers/');
 define('MODEL',ROOT_PATH.'/model/');
 define('TEMPLATE',ROOT_PATH.'/template/');
 define('CLASSES',ROOT_PATH.'/classes/');
+define('HELPERS',ROOT_PATH.'/helpers/');
 define('LIB',ROOT_PATH.'/lib/');
 define('ASSETS',ROOT_PATH.'/assets/');
 

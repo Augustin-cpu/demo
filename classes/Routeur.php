@@ -16,18 +16,45 @@ class Routeur
         $this->request = $request;
     }
 
+    public function getRoute(){
+        $elements = explode('/',$this->request);
+        return $elements[0];
+    }
+
+    public function getParams(){
+
+        // extract GET
+        $elements = explode('/',$this->request);
+        unset($elements[0]);
+        for($i = 1; $i < count($elements); $i++){
+            $params[$elements[$i]] = $elements[$i+1];
+            $i++;
+        }
+        if(!isset($params)) $params = null;
+
+        // extract POST
+        if($_POST){
+            foreach($_POST as $key => $value){
+                $params[$key] = $value;
+            }
+        }
+
+        return $params;
+    }
+
     public function renderController()
     {
-        $request = $this->request;
-        if (key_exists($request, $this->routes)) {
-            $controller = $this->routes[$request]['controller'];
-            $method = $this->routes[$request]['method'];
+        $route = $this->getRoute();
+        $params = $this->getParams();
+
+        if (key_exists($route, $this->routes)) {
+            $controller = $this->routes[$route]['controller'];
+            $method = $this->routes[$route]['method'];
 
             $currentController = new $controller();
-            $currentController->$method();
+            $currentController->$method($params);
         } else {
-            echo '404';
-            exit;
+            HttpHelpers::error404();
         }
     }
 }
